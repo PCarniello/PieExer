@@ -1,0 +1,46 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Máscaras</title>   
+
+    <!-- doc regex: 
+    https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/RegExp?utm_source=chatgpt.com
+    https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Regular_expressions?utm_source=chatgpt.com
+    -->
+
+</head>
+    
+<body>
+
+<label>Telefone:</label>
+<input type="text" id="telefone" maxlength="15">
+(apenas números)
+
+<script>  
+  document.getElementById("telefone").addEventListener("input", function() {
+      let telefone = this.value;
+
+      telefone = telefone.replace(/\D/g, ""); // Remove tudo que não for número
+
+      telefone = telefone.replace(/^(\d{2})(\d)/g, "($1) $2"); // Coloca o DDD entre parênteses e adiciona um espaço
+      
+      telefone = telefone.replace(/(\d{5})(\d{4})$/, "$1-$2"); // Coloca um hífen entre os últimos 9 números
+
+      this.value = telefone;
+  });
+</script>
+    
+</body>
+</html>
+
+<!--
+
+  - Regex: divide o número assim:
+
+    (\d{2}) → DDD
+    (\d{5}) → parte inicial do número (5 dígitos)
+    (\d{4}) → parte final
+
+    \d → um dígito, ou seja, um número de 0 a 9.
+    \D → qualquer coisa que NÃO seja um dígito.
+-->
